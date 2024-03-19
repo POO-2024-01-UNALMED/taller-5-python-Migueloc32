@@ -52,7 +52,7 @@ class Animal:
     
     def movimiento():
         pass
-    def totalPorTipo():
+    
     
 
     @classmethod
