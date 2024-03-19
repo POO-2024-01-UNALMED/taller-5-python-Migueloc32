@@ -1,4 +1,5 @@
-from animal import Animal
+from zooAnimales.animal import Animal
+
 
 class Pez(Animal):
 
@@ -7,24 +8,23 @@ class Pez(Animal):
     salmones=0
     bacalaos=0
 
+    def __init__(self, nombre, edad, habitat, genero, colorEscamas, cantidadAletas):
+        super().__init__(nombre, edad, habitat, genero)
+        self._colorEscamas = colorEscamas
+        self._cantidadAletas = cantidadAletas
+
     @classmethod
-    def crearSalmon(cls, nombre,edad, habitat, genero):
-        salmon=cls(nombre,edad, habitat, genero)
-        salmon._colorEscamas="rojo"
-        salmon._cantidadAletas=6
-        salmon._habitat="oceano"
+    def crearSalmon(cls, nombre, edad, genero, habitat="oceano", colorEscamas="rojo", cantidadAletas=6):
+        salmon = cls(nombre, edad, habitat, genero, colorEscamas, cantidadAletas)
         cls._listado.append(salmon)
-        cls.salmones+=1
+        cls.salmones += 1
         return salmon
 
     @classmethod
-    def crearSerpiente(cls, nombre,edad, habitat, genero):
-        bacalao=cls(nombre,edad, habitat, genero)
-        bacalao._colorEscamas="gris"
-        bacalao._cantidadAletas=6
-        bacalao._habitat="oceano"
+    def crearBacalao(cls, nombre, edad, genero, habitat="oceano", colorEscamas="gris", cantidadAletas=6):
+        bacalao = cls(nombre, edad, habitat, genero, colorEscamas, cantidadAletas)
         cls._listado.append(bacalao)
-        cls.bacalaos+=1
+        cls.bacalaos += 1
         return bacalao
     
     def getColorEscamas(self):
@@ -49,3 +49,6 @@ class Pez(Animal):
     @classmethod
     def cantidadPez(cls):
         len(cls._listado)
+    @classmethod
+    def totalPorTipo(cls):
+        return f"{cls.__name__}s : {cls.salmones+cls.bacalaos}"

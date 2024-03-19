@@ -1,4 +1,5 @@
-from animal import Animal
+from zooAnimales.animal import Animal
+
 
 class Mamifero(Animal):
 
@@ -6,24 +7,26 @@ class Mamifero(Animal):
 
     caballos=0
     leones=0
+
+    def __init__(self, nombre, edad, habitat, genero, pelaje, patas):
+        super().__init__(nombre, edad, habitat, genero)
+        self._pelaje = pelaje
+        self._patas = patas
+
     @classmethod
-    def crearLeon(cls, nombre,edad, habitat, genero):
-        leon=cls(nombre,edad, habitat, genero)
-        leon._pelaje=True
-        leon._patas=4
-        leon._habitad="selva"
+    def crearLeon(cls, nombre, edad, genero, habitat="Selva"):
+        leon = cls(nombre, edad, habitat, genero, True, 4)  # Añadidos valores para pelaje y patas
+        leon._habitad = "selva"  # Corregido error en la asignación de hábitat
         cls._listado.append(leon)
-        cls.leones+=1
+        cls.leones += 1
         return leon
 
     @classmethod
-    def crearCaballos(cls, nombre,edad, habitat, genero):
-        caballo=cls(nombre,edad, habitat, genero)
-        caballo._pelaje=True
-        caballo._patas=4
-        caballo._habitad="pradera"
+    def crearCaballo(cls, nombre, edad, genero, habitat="pradera"):
+        caballo = cls(nombre, edad, habitat, genero, True, 4)  # Añadidos valores para pelaje y patas
+        caballo._habitad = "pradera"  # Corregido error en la asignación de hábitat
         cls._listado.append(caballo)
-        cls.caballos+=1
+        cls.caballos += 1
         return caballo
     
     @classmethod
@@ -39,7 +42,7 @@ class Mamifero(Animal):
         self._listado = listado
     
     
-    def getPelaje(self):
+    def isPelaje(self):
         return self._pelaje
 
     def setPelaje(self, pelaje):
@@ -52,5 +55,8 @@ class Mamifero(Animal):
     def setPatas(self, patas):
         self._patas = patas
 
+    @classmethod
+    def totalPorTipo(cls):
+        return f"{cls.__name__}s : {cls.caballos+cls.leones}"
 
 

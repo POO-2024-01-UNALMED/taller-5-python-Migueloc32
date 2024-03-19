@@ -1,4 +1,5 @@
-from animal import Animal
+from zooAnimales.animal import Animal
+
 
 class Reptil(Animal):
 
@@ -7,26 +8,27 @@ class Reptil(Animal):
     iguanas=0
     serpientes=0
 
+    def __init__(self, nombre, edad, habitat, genero, colorEscamas, largoCola):
+        super().__init__(nombre, edad, habitat, genero)
+        self._colorEscamas = colorEscamas
+        self._largoCola = largoCola
+
     @classmethod
-    def crearIguana(cls, nombre,edad, habitat, genero):
-        iguana=cls(nombre,edad, habitat, genero)
-        iguana._colorEscamas="verde"
-        iguana._largoCola=3
-        iguana._habitad="humedal"
+    def crearIguana(cls, nombre, edad, genero, habitat="humedal"):
+        iguana = cls(nombre, edad, habitat, genero, "verde", 3)
+        iguana._habitat = "humedal"  # Corregido error en la asignación de hábitat
         cls._listado.append(iguana)
-        cls.iguanas+=1
+        cls.iguanas += 1
         return iguana
 
     @classmethod
-    def crearSerpiente(cls, nombre,edad, habitat, genero):
-        serpiente=cls(nombre,edad, habitat, genero)
-        serpiente._colorEscamas="verde"
-        serpiente._largoCola=1
-        serpiente._habitat="jungla"
+    def crearSerpiente(cls, nombre, edad, genero, habitat="jungla"):
+        serpiente = cls(nombre, edad, habitat, genero, "verde", 1)
+        serpiente._habitat = "jungla"  # Corregido error en la asignación de hábitat
         cls._listado.append(serpiente)
-        cls.serpientes+=1
+        cls.serpientes += 1
         return serpiente
-    
+
     def getColorEscamas(self):
         return self._colorEscamas
 
@@ -49,3 +51,6 @@ class Reptil(Animal):
     @classmethod
     def cantidadReptil(cls):
         len(cls._listado)
+    @classmethod
+    def totalPorTipo(cls):
+        return f"{cls.__name__}s : {cls.iguanas+cls.serpientes}"

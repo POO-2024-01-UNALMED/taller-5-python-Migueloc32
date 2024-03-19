@@ -1,4 +1,4 @@
-from animal import Animal
+from zooAnimales.animal import Animal
 
 class Ave(Animal):
 
@@ -7,23 +7,24 @@ class Ave(Animal):
     aguilas=0
     halcones=0
 
+    def __init__(self, nombre, edad, habitat, genero, colorPlumas):
+        super().__init__(nombre, edad, habitat, genero)
+        self._colorPlumas = colorPlumas
+
     @classmethod
-    def crearAguila(cls, nombre,edad, habitat, genero):
-        aguila=cls(nombre,edad, habitat, genero)
-        aguila._colorPlumas="blanco y amarillo"
-        aguila._habitad="montanas"
+    def crearAguila(cls, nombre, edad, genero, colorPlumas="blanco y amarillo"):
+        aguila = cls(nombre, edad, "montanas", genero, colorPlumas)
         cls._listado.append(aguila)
-        cls.aguilas+=1
+        cls.aguilas += 1
         return aguila
 
     @classmethod
-    def crearHalcon(cls, nombre,edad, habitat, genero):
-        Halcon=cls(nombre,edad, habitat, genero)
-        Halcon._colorPlumas="café glorioso"
-        Halcon._habitat="montanas"
-        cls._listado.append(Halcon)
-        cls.halcones+=1
-        return Halcon
+    def crearHalcon(cls, nombre, edad, genero, colorPlumas="café glorioso"):
+        halcon = cls(nombre, edad, "montanas", genero, colorPlumas)
+        cls._listado.append(halcon)
+        cls.halcones += 1
+        return halcon
+
     
 
     def setColorPlumas(self, color):
@@ -44,3 +45,6 @@ class Ave(Animal):
     @classmethod
     def cantiAves(cls):
         len(cls._listado)
+    @classmethod
+    def totalPorTipo(cls):
+        return f"{cls.__name__}s : {cls.aguilas+cls.halcones}"

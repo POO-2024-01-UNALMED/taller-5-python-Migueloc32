@@ -53,38 +53,9 @@ class Animal:
     def movimiento():
         pass
     
-    
-
     @classmethod
     def totalPorTipo(cls):
-        conteoMamiferos = 0
-        conteoAves = 0
-        conteoReptiles = 0
-        conteoPeces = 0
-        conteoAnfibios = 0
-
-        todasClases = globals().values()
-
-        for clase in todasClases:
-            if issubclass(clase, cls):
-                if clase.__name__ == "Mamifero":
-                    conteoMamiferos += len(clase._listado)
-                elif clase.__name__ == "Ave":
-                    conteoAves += len(clase._listado)
-                elif clase.__name__ == "Reptil":
-                    conteoReptiles += len(clase._listado)
-                elif clase.__name__ == "Pez":
-                    conteoPeces += len(clase._listado)
-                elif clase.__name__ == "Anfibio":
-                    conteoAnfibios += len(clase._listado)
-
-        mensaje = (f"Mamiferos: {conteoMamiferos}\n"
-                   f"Aves: {conteoAves}\n"
-                   f"Reptiles: {conteoReptiles}\n"
-                   f"Peces: {conteoPeces}\n"
-                   f"Anfibios: {conteoAnfibios}")
-
-        return mensaje
+        return f"{cls.__name__}s : {cls._totalAnimales}"
     
     def toString(self):
         if self._zona==None:

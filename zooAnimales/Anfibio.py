@@ -1,4 +1,4 @@
-from animal import Animal
+from zooAnimales.animal import Animal
 
 class Anfibio(Animal):
 
@@ -7,24 +7,25 @@ class Anfibio(Animal):
     salamandras=0
     ranas=0
 
+    def __init__(self, nombre, edad, habitat, genero, colorPiel, venenoso):
+        super().__init__(nombre, edad, habitat, genero)
+        self._colorPiel = colorPiel
+        self._venenoso = venenoso
+
     @classmethod
-    def crearSalamandra(cls, nombre,edad, habitat, genero):
-        salamandra=cls(nombre,edad, habitat, genero)
-        salamandra._colorPiel="negro y amarillo"
-        salamandra._venenoso=False
-        salamandra._habitat="selva"
+    def crearSalamandra(cls, nombre, edad, genero, habitat="selva"):
+        salamandra = cls(nombre, edad, habitat, genero, "negro y amarillo", False)
+        salamandra._habitat = "selva"  # Corregido error en la asignación de hábitat
         cls._listado.append(salamandra)
-        cls.salamandras+=1
+        cls.salamandras += 1
         return salamandra
 
     @classmethod
-    def crearRana(cls, nombre,edad, habitat, genero):
-        rana=cls(nombre,edad, habitat, genero)
-        rana._colorPiel="rojo"
-        rana._venenoso=True
-        rana._habitat="selva"
+    def crearRana(cls, nombre, edad, genero, habitat="selva"):
+        rana = cls(nombre, edad, habitat, genero, "rojo", True)
+        rana._habitat = "selva"  # Corregido error en la asignación de hábitat
         cls._listado.append(rana)
-        cls.ranas+=1
+        cls.ranas += 1
         return rana
 
     
@@ -36,7 +37,7 @@ class Anfibio(Animal):
         self._colorPiel = color
 
     # Getter y setter para el atributo _venenoso
-    def getVenenoso(self):
+    def isVenenoso(self):
         return self._venenoso
 
     def setVenenoso(self, venenoso):
@@ -50,3 +51,6 @@ class Anfibio(Animal):
     @classmethod
     def cantidadAnfibios(cls):
         len(cls._listado)
+    @classmethod
+    def totalPorTipo(cls):
+        return f"{cls.__name__}s : {cls.salamandras+cls.ranas}"
